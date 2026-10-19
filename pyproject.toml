@@ -10,6 +10,11 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = "LicenseRef-Proprietary"
 license-files = ["LICENSE"]
+
+authors = [
+    { name = "lambdadotjoburg", email = "lambdadotjoburg@gmail.com" }
+]
+
 dependencies = [
     "uvicorn",
     "fastapi",
@@ -32,3 +37,8 @@ skeleton = [
     "infrastructure/bootstrap/src/templates/config/.gitignore",
     "packages/.skeleton/*.tgz",
 ]
+
+[project.urls]
+Homepage = "https://github.com/lambdadotjoburg/skeleton"
+Repository = "https://github.com/lambdadotjoburg/skeleton"
+Issues = "https://github.com/lambdadotjoburg/skeleton/issues"

@@ -1,17 +1,19 @@
 # Skeleton Framework
 
-<img width="200px" src ="./skeleton.png"/>
+![Skeleton Logo](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/skeleton.png)
 
-Skeleton is a full-stack application framework that combines Python orchestration, a FastAPI reverse-proxy gateway, a Python backend, and a TypeScript frontend.
+Skeleton is a full-stack application orchestration framework that combines
+Python orchestration, a FastAPI reverse-proxy gateway, a Python backend & TypeScript frontend.
 
-It provides a structured development workflow for configuring, initializing, installing, running, and building full-stack applications.
+It provides a structured development workflow for configuring,
+initializing, installing, running & building full-stack applications.
 
 ## Features
 
 - **Python orchestration** for application setup and service execution.
 - **FastAPI gateway** for centralized request routing and communication with backend services.
 - **Python backend** for application APIs.
-- **TypeScript frontend** with React and Webpack tooling.
+- **TypeScript frontend** with Webpack tooling.
 - **Configurable project structure** through JSON configuration files.
 - **Separate environments** for framework development and client application dependencies.
 - **Command-line tooling** for initialization, development, building, and cleanup.
@@ -20,16 +22,16 @@ It provides a structured development workflow for configuring, initializing, ins
 
 Skeleton separates the application into cooperating layers:
 
-| Layer | Technology |
-|---|---|
-| Orchestration and CLI | Python |
-| Gateway and backend APIs | FastAPI |
-| HTTP server | Uvicorn |
-| HTTP communication | HTTPX |
-| Frontend | TypeScript and React |
-| Frontend bundling | Webpack |
-| Development file watching | watchfiles |
-| Dependency management | pip and npm |
+| Layer                     | Technology  |
+|---------------------------|-------------|
+| Orchestration and CLI     | Python      |
+| Gateway and backend APIs  | FastAPI     |
+| HTTP server               | Uvicorn     |
+| HTTP communication        | HTTPX       |
+| Frontend                  | TypeScript  |
+| Frontend bundling         | Webpack     |
+| Development file watching | watchfiles  |
+| Dependency management     | pip and npm |
 
 The gateway provides a central entry point for browser requests and coordinates communication between the frontend and backend.
 
@@ -37,9 +39,8 @@ The gateway provides a central entry point for browser requests and coordinates 
 
 Before getting started, install:
 
-- Python 3.11 or later.
+- Python 3.11 or later & pip.
 - Node.js and npm.
-- pip, included with standard Python installations.
 
 ## Installation
 
@@ -48,6 +49,10 @@ Install Skeleton from PyPI:
 ```bash
 python -m pip install skeleton-framework
 ```
+
+![client-venv](docs/gif/client/00_client_venv.gif)
+
+![client-pip-install-skeleton-framework](docs/gif/client/01_client_pip_install_skeleton_framework.gif)
 
 The installed Python distribution provides the `skeleton` command.
 
@@ -65,6 +70,8 @@ Configure the project, initialize its files, and install its dependencies:
 ```bash
 skeleton --quickstart
 ```
+
+![client-venv](docs/gif/client/04_client_quickstart.gif)
 
 This combines the configuration, initialization, and installation stages.
 
@@ -86,6 +93,8 @@ Skeleton also exposes the individual stages when you want to configure the appli
 skeleton --config
 ```
 
+![client-config-init](docs/gif/client/02_client_config_init.gif)
+
 This generates the project's configuration files:
 
 - `skeleton-layout.json` — defines the application layout.
@@ -102,6 +111,8 @@ Review and customize these files before initialization if necessary.
 skeleton --init
 ```
 
+![client-config-init](docs/gif/client/02_client_config_init.gif)
+
 Initialization creates the configured frontend and backend structure from the framework's templates, prepares dependency manifests, and configures the local frontend tooling packages.
 
 ### 3. Install dependencies
@@ -109,6 +120,8 @@ Initialization creates the configured frontend and backend structure from the fr
 ```bash
 skeleton --install
 ```
+
+![client-install](docs/gif/client/03_client_install.gif)
 
 This installs frontend dependencies using npm and backend Python dependencies into the backend's `.venv` environment.
 
@@ -121,8 +134,10 @@ skeleton --start
 You can also explicitly select services:
 
 ```bash
-skeleton --start frontend gateway packages --open
+skeleton --start frontend gateway --open
 ```
+
+![client-start](docs/gif/client/05_client_start.gif)
 
 The selected services and runtime options determine which processes are started.
 
@@ -130,13 +145,13 @@ The selected services and runtime options determine which processes are started.
 
 Run these commands from the client project root:
 
-| Command | Purpose |
-|---|---|
-| `skeleton --serve` | Start the frontend development server. |
-| `skeleton --build` | Build the frontend for distribution. |
-| `skeleton --preview` | Run the configured frontend preview script. |
-| `skeleton --clean` | Remove generated frontend build artifacts. |
-| `skeleton --purge` | Remove frontend build artifacts and disposable development dependencies. |
+| Command              | Purpose                                                                  |
+|----------------------|--------------------------------------------------------------------------|
+| `skeleton --serve`   | Start the frontend development server.                                   |
+| `skeleton --build`   | Build the frontend for distribution.                                     |
+| `skeleton --preview` | Run the configured frontend preview script.                              |
+| `skeleton --clean`   | Remove generated frontend build artifacts.                               |
+| `skeleton --purge`   | Remove frontend build artifacts and disposable development dependencies. |
 
 These commands invoke the corresponding scripts defined in the configured frontend directory's `package.json`.
 
@@ -144,10 +159,10 @@ These commands invoke the corresponding scripts defined in the configured fronte
 
 The default development configuration uses the following ports:
 
-| Service | Address |
-|---|---|
-| Gateway / reverse proxy | `http://127.0.0.1:8000` |
-| Backend API | `http://127.0.0.1:8080` |
+| Service                     | Address                 |
+|-----------------------------|-------------------------|
+| Gateway / reverse proxy     | `http://127.0.0.1:8000` |
+| Backend API                 | `http://127.0.0.1:8080` |
 | Frontend development server | `http://127.0.0.1:3000` |
 
 The gateway is the normal entry point for browser access.
@@ -168,7 +183,9 @@ Actual routes depend on the application's server and gateway configuration.
 
 ## Project structure
 
-A generated client project follows the configured layout. A typical structure is:
+A generated client project follows the configured layout.
+
+A typical structure is:
 
 ```text
 my-app/
@@ -181,7 +198,11 @@ my-app/
 └── .skeleton/
 ```
 
-The frontend contains the TypeScript application and its npm tooling. The backend contains the Python application and its own virtual environment. The `.skeleton/` directory holds local framework tooling and generated assets.
+The frontend contains the TypeScript application and its npm tooling.
+
+The backend contains the Python application and its own virtual environment.
+
+The `.skeleton/` directory holds local framework tooling and generated assets.
 
 The exact structure depends on the project's configuration.
 
@@ -189,9 +210,15 @@ The exact structure depends on the project's configuration.
 
 Run `skeleton --clean` to remove generated frontend build outputs.
 
-Run `skeleton --purge` when you want to remove the generated build outputs and disposable frontend development dependencies.
+Run `skeleton --purge` if you want to remove the generated build outputs & disposable frontend development dependencies.
 
-**Warning:** Purging is destructive. It may remove `node_modules`, lockfiles, and generated local tooling artifacts. Dependencies may need to be installed again.
+**Warning:**
+
+Purging is destructive
+
+It may remove `node_modules`, lockfiles, and generated local tooling artifacts.
+
+Dependencies may need to be installed again.
 
 ## Troubleshooting
 
@@ -211,21 +238,23 @@ From the client project root, run:
 skeleton --install
 ```
 
-If the project has not yet been initialized, run `skeleton --init` first.
+If the project has not yet been initialized, run `skeleton --config` followed by `skeleton --init` first.
 
 ### Application startup fails
 
 Check that:
 
-- The project has been configured and initialized.
-- Dependencies have been installed.
+- The project has been configured and initialized `skeleton-layout.json`
+- Dependencies have been installed `skeleton-dependencies.json`
 - The selected services are included in the startup command.
-- The required ports are available.
+- The required ports are available `skeleton-servers.json`.
 - The server configuration matches the configured project layout.
 
 ### Framework tooling packages are missing
 
-If working directly from the framework source repository, run the framework's packaging command before initializing a client project:
+If working directly from the framework source repository,
+run the framework's packaging command before initializing
+a client project:
 
 ```bash
 python run.py --pack
@@ -272,11 +301,19 @@ Skeleton is an experimental framework under active development. Its goal is to p
 
 These commands are intended for contributors working in the Skeleton framework source repository, not ordinary client projects.
 
+To get the skeleton framework onto your local machine for development, clone:
+
+[https://github.com/lambdadotjoburg/skeleton.git](https://github.com/lambdadotjoburg/skeleton.git)
+
+![dev-clone](docs/gif/dev/00_dev_clone.gif)
+
 ### Initialize the framework development environment
 
 ```bash
 python run.py --bootstrap
 ```
+
+![dev-bootstrap](docs/gif/dev/01_dev_bootstrap.gif)
 
 This combines `--init` and `--install` to initialize and install the framework's development environment.
 
@@ -286,7 +323,12 @@ This combines `--init` and `--install` to initialize and install the framework's
 python run.py --dist
 ```
 
-This combines `--pack` and `--build`. It prepares the distributable tooling packages and builds the Python distribution in `dist/`.
+![dev-dist](docs/gif/dev/02_dev_dist.gif)
+
+This combines `--pack` and `--build`.
+
+It prepares the distributable tooling packages
+& builds the Python distribution in `dist/`.
 
 ### Cleanup
 
@@ -299,7 +341,9 @@ The framework's Python development environment and root `requirements.txt` are p
 
 ## Framework Developer: Testing a Local Installation
 
-Use this workflow to test the locally built `skeleton-framework` distribution in a separate client project. This verifies that the installed package works independently of the framework source repository.
+Use this workflow to test the locally built `skeleton-framework` distribution in a separate client project.
+
+This verifies that the installed package works independently of the framework source repository.
 
 ### 1. Build the distribution
 
@@ -341,9 +385,13 @@ From the test project directory:
 python -m pip install --force-reinstall ../framework/dist/skeleton_framework-0.1.0-py3-none-any.whl
 ```
 
-Adjust the relative path, wheel filename, and version to match your framework checkout and build output.
+Adjust the relative path, wheel filename & version to match your framework checkout and build output.
 
-The `--force-reinstall` option reinstalls the wheel even if that version is already present. `--no-deps` prevents pip from reinstalling the package's dependencies; use this option when those dependencies are already available in the environment. Otherwise, omit `--no-deps`.
+The `--force-reinstall` option reinstalls the wheel even if that version is already present.
+
+`--no-deps` prevents pip from reinstalling the package's dependencies.
+
+Use this option only when those dependencies are already available in the environment, otherwise, omit `--no-deps`.
 
 ### 5. Verify the installation
 
@@ -398,12 +446,14 @@ python run.py --dist
 Then reinstall the newly built wheel in the test project's virtual environment using the installation command above.
 
 This workflow lets you test packaging, bundled tooling, configuration files, templates,
-and CLI behavior without running the client project directly from the framework source tree.
+& CLI behavior without running the client project directly from the framework source tree.
 
 **Important:**
+
 The framework development environment and the test project's `.venv` are independent.
-Install the locally built wheel into the test environment, and run the client commands
-from the test project directory.
+
+Install the locally built wheel into the test environment
+& run the client commands from the test project directory.
 
 ## Licence
 
@@ -412,8 +462,8 @@ Skeleton Framework is proprietary software. Copyright © 2026 lambdadotjoburg. A
 The source code is publicly available for inspection, but public availability
 does not grant unrestricted rights to use, modify, or redistribute the framework.
 
-Personal learning, educational activities, and non-commercial experimentation are permitted
-under the terms of the root [LICENSE](./LICENSE) file.
+Personal learning, educational activities, and non-commercial experimentation
+are permitted under the terms of the root [LICENSE](./LICENSE) file.
 
 Commercial use requires a separate paid licence from the copyright holder.
 Redistribution requires prior written permission.
