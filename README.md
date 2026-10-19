@@ -50,9 +50,9 @@ Install Skeleton from PyPI:
 python -m pip install skeleton-framework
 ```
 
-![client-venv](docs/gif/client/00_client_venv.gif)
+![client-venv](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/docs/gif/client/00_client_venv.gif)
 
-![client-pip-install-skeleton-framework](docs/gif/client/01_client_pip_install_skeleton_framework.gif)
+![client-pip-install-skeleton-framework](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/docs/gif/client/01_client_pip_install_skeleton_framework.gif)
 
 The installed Python distribution provides the `skeleton` command.
 
@@ -71,7 +71,7 @@ Configure the project, initialize its files, and install its dependencies:
 skeleton --quickstart
 ```
 
-![client-venv](docs/gif/client/04_client_quickstart.gif)
+![client-venv](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/docs/gif/client/04_client_quickstart.gif)
 
 This combines the configuration, initialization, and installation stages.
 
@@ -93,7 +93,7 @@ Skeleton also exposes the individual stages when you want to configure the appli
 skeleton --config
 ```
 
-![client-config-init](docs/gif/client/02_client_config_init.gif)
+![client-config-init](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/docs/gif/client/02_client_config_init.gif)
 
 This generates the project's configuration files:
 
@@ -111,7 +111,7 @@ Review and customize these files before initialization if necessary.
 skeleton --init
 ```
 
-![client-config-init](docs/gif/client/02_client_config_init.gif)
+![client-config-init](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/docs/gif/client/02_client_config_init.gif)
 
 Initialization creates the configured frontend and backend structure from the framework's templates, prepares dependency manifests, and configures the local frontend tooling packages.
 
@@ -121,7 +121,7 @@ Initialization creates the configured frontend and backend structure from the fr
 skeleton --install
 ```
 
-![client-install](docs/gif/client/03_client_install.gif)
+![client-install](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/docs/gif/client/03_client_install.gif)
 
 This installs frontend dependencies using npm and backend Python dependencies into the backend's `.venv` environment.
 
@@ -137,7 +137,7 @@ You can also explicitly select services:
 skeleton --start frontend gateway --open
 ```
 
-![client-start](docs/gif/client/05_client_start.gif)
+![client-start](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/docs/gif/client/05_client_start.gif)
 
 The selected services and runtime options determine which processes are started.
 
@@ -303,9 +303,9 @@ These commands are intended for contributors working in the Skeleton framework s
 
 To get the skeleton framework onto your local machine for development, clone:
 
-[https://github.com/lambdadotjoburg/skeleton.git](https://github.com/lambdadotjoburg/skeleton.git)
+[Skeleton Github repository](https://github.com/lambdadotjoburg/skeleton.git)
 
-![dev-clone](docs/gif/dev/00_dev_clone.gif)
+![dev-clone](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/docs/gif/dev/00_dev_clone.gif)
 
 ### Initialize the framework development environment
 
@@ -313,7 +313,7 @@ To get the skeleton framework onto your local machine for development, clone:
 python run.py --bootstrap
 ```
 
-![dev-bootstrap](docs/gif/dev/01_dev_bootstrap.gif)
+![dev-bootstrap](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/docs/gif/dev/01_dev_bootstrap.gif)
 
 This combines `--init` and `--install` to initialize and install the framework's development environment.
 
@@ -323,7 +323,7 @@ This combines `--init` and `--install` to initialize and install the framework's
 python run.py --dist
 ```
 
-![dev-dist](docs/gif/dev/02_dev_dist.gif)
+![dev-dist](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/docs/gif/dev/02_dev_dist.gif)
 
 This combines `--pack` and `--build`.
 
@@ -382,7 +382,7 @@ source .venv/bin/activate
 From the test project directory:
 
 ```bash
-python -m pip install --force-reinstall ../framework/dist/skeleton_framework-0.1.0-py3-none-any.whl
+python -m pip install --force-reinstall ../framework/dist/skeleton_framework-0.1.2-py3-none-any.whl
 ```
 
 Adjust the relative path, wheel filename & version to match your framework checkout and build output.
