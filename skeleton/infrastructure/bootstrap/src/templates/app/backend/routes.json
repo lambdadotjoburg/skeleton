@@ -1,0 +1,10 @@
+{
+    "routes": {
+        "test": {
+            "methods": ["GET"],
+            "route": "/test",
+            "summary": "Demo test Endpoint",
+            "tags": ["test"]
+        }
+    }
+}

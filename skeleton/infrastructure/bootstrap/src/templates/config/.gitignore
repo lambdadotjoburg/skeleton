@@ -1,0 +1,21 @@
+# Skeleton local package artifacts
+.skeleton/
+
+# node, js, ts & webpack
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+.mypy_cache/
+*.pyc
+.venv/
+venv/
+env/
+
+# misc
+.DS_Store
+.vscode

@@ -1,0 +1,12 @@
+{
+    "layout": {
+
+        "infrastructure": "skeleton/infrastructure",
+        
+        "common": "skeleton/infrastructure/common",
+        "gateway": "skeleton/infrastructure/gateway",
+        "runners": "skeleton/infrastructure/runners",
+
+        "packages": "skeleton/packages"
+    }
+}

@@ -1,0 +1,146 @@
+# Skeleton Framework Proprietary Licence
+
+**Copyright © 2026 lambdadotjoburg. All rights reserved.**
+
+This licence applies to Skeleton Framework, including its original source code,
+framework components, documentation, templates, configuration files,
+and associated materials owned by the copyright holder (collectively, the "Software").
+
+By accessing, downloading, installing, or using the Software, you acknowledge the terms of this licence.
+
+## 1. Ownership and Copyright
+
+The Software is proprietary software. All copyright and other intellectual property rights
+in the Software remain with the copyright holder, except for third-party materials governed
+by their respective licences.
+
+No ownership rights are transferred to any user by this licence.
+All rights not expressly granted are reserved by the copyright holder.
+
+## 2. Permitted Personal and Educational Use
+
+Subject to the terms of this licence, the copyright holder grants individuals a limited,
+non-exclusive, non-transferable, revocable licence to access and use the Software solely
+for personal learning, educational activities, experimentation, and non-commercial evaluation.
+
+This permission includes running the Software and making modifications reasonably necessary
+for the permitted non-commercial purposes, provided that the Software or modifications are
+not used for commercial purposes or redistributed without written permission.
+
+This permission does not grant any right to commercially deploy, sell, sublicense,
+distribute, or provide the Software as part of a commercial product or service.
+
+## 3. Commercial Use Requires a Paid Licence
+
+Commercial use is not permitted under the free personal and educational licence.
+
+Any commercial use requires a separate written commercial licence issued by
+the copyright holder and payment of the applicable licence fees, as specified in that agreement.
+
+Commercial use includes, without limitation:
+
+- Using the Software in a business, commercial product, or revenue-generating service.
+- Deploying the Software for a commercial organisation or its customers.
+- Incorporating the Software into a product or service offered for sale or commercial advantage.
+- Providing access to the Software or a framework-based service as part of a paid offering.
+
+The copyright holder may offer different commercial licence terms, fees,
+usage limits, and support arrangements under separate written agreements.
+
+## 4. Modification
+
+Modification is permitted only within the scope of an applicable licence.
+
+Users operating under the free personal and educational licence may modify
+the Software solely for the permitted non-commercial purposes described in Section 2.
+
+Commercial modifications, modifications outside the permitted scope,
+and any other use not expressly authorised by this licence require
+separate written permission or an applicable commercial licence.
+
+Modifications do not transfer ownership of the original Software to
+the person making them. Ownership and licensing of independently created
+modifications will be determined by applicable law and any separate written agreement.
+
+## 5. Redistribution and Sublicensing
+
+Redistribution of the Software, in source-code or compiled form, requires the copyright holder's prior written permission.
+
+Without that permission, you may not:
+
+- Republish or distribute copies of the Software.
+- Bundle or redistribute the Software with another product or package.
+- Mirror or host copies of the Software for third-party distribution.
+- Sublicense, sell, rent, lease, or otherwise transfer rights to the Software.
+- Distribute modified versions of the Software.
+
+Access to a public repository or package registry does not, by itself, grant permission to redistribute the Software.
+
+## 6. Contributions
+
+No contribution transfers copyright ownership to the copyright holder merely because it is submitted.
+
+Contributions intended for inclusion in the Software must be accompanied by a separate written agreement,
+or other expressly accepted contribution terms, establishing the rights necessary for the copyright holder
+to use, modify, distribute, and license the contribution as intended.
+
+Contributors remain responsible for ensuring they have the rights necessary to submit their contributions.
+
+## 7. Third-Party Components
+
+The Software may include or depend on third-party software, packages, libraries, or other materials.
+
+Such components remain subject to their own applicable licences.
+This licence does not override third-party licence obligations
+or grant rights that the copyright holder does not possess.
+
+Users are responsible for complying with applicable third-party licence terms.
+
+## 8. Restrictions
+
+Except as expressly authorised by this licence or applicable law,
+you may not use the Software outside the scope of the permissions granted,
+remove or misrepresent copyright notices, or claim ownership of the original Software.
+
+Nothing in this licence excludes rights that cannot lawfully be excluded or restricted under applicable law.
+
+## 9. Termination
+
+Permission under this licence terminates automatically if you materially breach its terms.
+Upon termination, you must cease the use that is no longer authorised and comply with applicable legal obligations.
+
+Termination does not extinguish rights or obligations that have accrued before termination or provisions that by their nature continue to apply.
+
+## 10. Disclaimer of Warranty
+
+To the maximum extent permitted by applicable law, the Software is provided "AS IS"
+and without warranties of any kind, whether express or implied, including warranties
+of merchantability, fitness for a particular purpose, and non-infringement.
+
+The copyright holder does not guarantee that the Software will be error-free, secure, uninterrupted, or suitable for any particular purpose.
+
+## 11. Limitation of Liability
+
+To the maximum extent permitted by applicable law, the copyright holder
+will not be liable for indirect, incidental, special, consequential,
+or exemplary damages arising from the use of, or inability to use, the Software.
+
+Nothing in this section excludes or limits liability that cannot lawfully be excluded or limited.
+
+## 12. Commercial Licensing and Contact
+
+For commercial licensing, written permissions, redistribution requests, or contribution agreements, contact:
+
+**Copyright holder:** lambdadotjoburg
+**Email:** lambdadotjoburg@gmail.com
+
+No commercial licence or redistribution permission is granted unless expressly agreed in writing by the copyright holder.
+
+## 13. Governing Law
+
+The governing law and jurisdiction for this licence should be specified
+in a separate written agreement or, where applicable, determined under applicable law.
+
+---
+
+**All rights reserved.**

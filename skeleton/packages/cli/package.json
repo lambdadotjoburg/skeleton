@@ -1,0 +1,43 @@
+{
+    "name": "@skeleton/cli",
+    "version": "1.0.0",
+    "author": "lambda",
+    "license": "ISC",
+    "description": "skeleton cli",
+
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "type": "module",
+
+    "bin": {
+        "skeleton": "./bin/cli.js"
+    },
+
+    "exports": {
+        
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js"
+        }
+    },
+
+    "files": [
+        "dist",
+        "bin"
+    ],
+
+    "scripts": {
+        "build": "tsc",
+        "prepublishOnly": "npm run build"
+    },
+
+    "dependencies": {
+        
+        "@skeleton/webpack": "^1.0.0"
+    },
+
+    "devDependencies": {
+        "@types/node": "*",
+        "typescript": "^6.0.3"
+    }    
+}

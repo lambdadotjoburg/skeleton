@@ -1,0 +1,32 @@
+# node, js, ts & webpack
+node_modules/
+coverage/
+*.tsbuildinfo
+
+# python environments
+.venv/
+venv/
+env/
+
+# Python cache and tooling
+pycache/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+*.pyc
+
+# python build artifacts
+dist/
+build/
+*.egg-info/
+
+# Environment vars and secrets
+.env
+.env.*
+!.env.example
+
+# misc
+.DS_Store
+.vscode

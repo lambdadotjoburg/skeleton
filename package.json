@@ -1,0 +1,26 @@
+{
+    "name": "skeleton-monorepo",
+    
+    "version": "1.0.0",
+    "private": true,
+
+    "workspaces": [
+        "skeleton/packages/*"
+    ],
+    
+    "type": "module",
+    
+    "devDependencies": {
+        "tsx": "^4.21.0",
+        "typescript": "^6.0.3"
+    },
+
+    "scripts": {
+
+        "packages:watch": "tsc -b -w --preserveWatchOutput",
+        "packages:build": "tsc -b",
+        "packages:clean": "tsc -b --clean",
+
+        "root": "python run.py --watch --open"
+    }
+}

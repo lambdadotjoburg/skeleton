@@ -1,0 +1,11 @@
+{
+    "project": {
+        "app": "app"
+    },
+    "frontend": {
+        "directory": "frontend"
+    },
+    "backend": {
+        "directory": "backend"
+    }
+}

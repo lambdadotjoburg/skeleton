@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skeleton-framework"
+version = "0.1.0"
+description = "A full-stack app framework: Python orchestration + FastAPI + WebPack frontend."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "LicenseRef-Proprietary"
+license-files = ["LICENSE"]
+dependencies = [
+    "uvicorn",
+    "fastapi",
+    "httpx",
+    "watchfiles",
+]
+
+[project.scripts]
+skeleton = "skeleton.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["skeleton*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+skeleton = [
+    "infrastructure/**/*.json",
+    "infrastructure/bootstrap/src/templates/**/*",
+    "infrastructure/bootstrap/src/templates/config/.gitignore",
+    "packages/.skeleton/*.tgz",
+]

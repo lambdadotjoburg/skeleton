@@ -1,0 +1,20 @@
+{
+    "schemas": {
+        "http": {
+            "backend": {
+                "prefix": "/api",
+                "strip": true
+            },
+            "frontend": {
+                "prefix": "/",
+                "strip": false
+            }
+        },
+        "ws": {
+            "backend": {
+                "prefix": "/ws",
+                "strip": true
+            }
+        }
+    }
+}

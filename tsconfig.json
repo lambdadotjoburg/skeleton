@@ -1,0 +1,11 @@
+{
+    "files": [],
+    "references": [
+
+        /* skeleton cli build tooling */
+        { "path": "skeleton/packages/cli" },
+
+        /* webpack stand-alone build tooling! */
+        { "path": "skeleton/packages/webpack" },
+    ],
+}
