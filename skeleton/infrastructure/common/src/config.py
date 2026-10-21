@@ -1,14 +1,13 @@
 from pathlib import Path
 
 from skeleton.infrastructure.common.src.loader import load
-from skeleton.infrastructure.common.src.layout import ProjectLayout
 from skeleton.infrastructure.common.src.repository import ConfigRepository
 
 def load_runtime_config(
     path: Path,
     project_root: Path,
     framework_root: Path,
-    layout: ProjectLayout,
+    # layout: ProjectLayout,
 ) -> ConfigRepository:
 
     CONFIG = load(path)["config"]
@@ -25,7 +24,8 @@ def load_runtime_config(
 
         data[name] = load(root / config)
 
-    frontend_config = layout.frontend / "skeleton-config.json"
+    # frontend_config = layout.frontend / "skeleton-config.json"
+    frontend_config = project_root / "skeleton-config.json"
     data["frontend"] = load(frontend_config)
 
     return ConfigRepository(

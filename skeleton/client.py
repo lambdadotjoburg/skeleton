@@ -176,11 +176,13 @@ def main(
 
         from skeleton.infrastructure.bootstrap.src.config import config
 
+        framework = args[1] if len(args) > 1 else None
+
         config(
             framework_root=framework_root,
             project_root=project_root,
+            framework=framework,
         )
-
         return 0
 
     if command == "--init":

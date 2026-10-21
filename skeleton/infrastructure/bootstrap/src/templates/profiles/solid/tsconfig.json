@@ -1,0 +1,93 @@
+{
+    "compilerOptions": {
+
+        /* leave JSX for subsequent compilation step! */
+        "jsx": "preserve",
+
+        /* tells TypeScript to use Solid's JSX types */
+        "jsxImportSource": "solid-js",
+
+        "target": "ES2022", // emit as-is
+        "module": "ES2022", // modern import/export syntax
+
+        /**
+         * Using a bundler, like webpack or vite!
+         * Don't treat module imports like node!
+         * Consume ESM packages like @skeleton/core
+         * Enable extensionless imports!
+         */
+        "moduleResolution": "bundler",
+        
+        /** Declare which global API's exit in env! */
+        "lib": ["DOM", "ES2022"],
+
+        /*
+         * save information about project graph from last compilation by detecting
+         * smallest set of files to re-emit instead of recompiling the entire project,
+         * enabling significantly faster subsequent builds by caching metadata
+         * This generates a .tsbuildinfo file (add to .gitignore!)
+         */
+        "incremental": true,
+
+        /**
+         * Fix module compatibility between
+         * CommonJS (require) & ES Modules (import)
+         */
+        // "esModuleInterop": true,
+
+        /**
+         * enable imports like ./config.json
+         */
+        "resolveJsonModule": true,
+
+        /**
+         * Each file to be compiled independently!
+         */
+        "isolatedModules": true,
+
+        /* webpack handles build! */
+        "noEmit": true,
+        "noEmitOnError": true,
+        "sourceMap": true,
+        
+        /**
+         * skip type checking .d.ts files in node_modules
+         * Many packages have imperfect/conflicting/legacy types!
+         */
+        "skipLibCheck": true,
+
+        "strict": true,
+        "noImplicitAny": true,
+        // "noUnusedLocals": true,
+        "noImplicitReturns": true,
+        // "noUnusedParameters": true,
+
+        "forceConsistentCasingInFileNames": true,
+        // "disableSourceOfProjectReferenceRedirect": true,
+        
+        "removeComments": true,
+
+        /**
+         * Decorators & typescript metadata!
+         */
+        /* @decorator/annotation syntax */
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        // "useDefineForClassFields": true,
+
+        /* uses tsconfig-paths-webpack-plugin */
+        "paths": {
+
+            // common aliases!
+            "@styles/*": ["./src/static/css/*"],
+            "@scripts/*": ["./src/static/js/*"],
+            "@img/*": ["./src/static/img/*"],
+        },
+    },
+
+    "include": ["./src/**/*",],
+    "exclude": [
+        "dist",
+        "node_modules"
+    ],
+}

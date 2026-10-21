@@ -27,10 +27,15 @@ from pathlib import Path
 # ============================================================
 
 # skeleton --config
+# skeleton --config react
+# skeleton --config solid
+# skeleton --config vue
+
 # skeleton --init
 # skeleton --install
 # skeleton --start
 # skeleton --start frontend gateway --open
+
 # skeleton --quickstart
 
 # skeleton --serve

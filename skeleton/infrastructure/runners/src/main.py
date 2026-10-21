@@ -44,7 +44,7 @@ def run(
         layout.common / Bootstrap.CONFIG_FILE_EXT,
         project_root,
         framework_root,
-        layout,
+        # layout,
     )
 
     context = RuntimeContext(

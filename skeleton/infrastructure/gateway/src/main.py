@@ -121,7 +121,7 @@ if __name__ == "__main__":
         layout.common / Bootstrap.CONFIG_FILE_EXT,
         PROJECT_ROOT,
         FRAMEWORK_ROOT,
-        layout,
+        # layout,
     )
 
     env = build_env(PROJECT_ROOT, MODE)

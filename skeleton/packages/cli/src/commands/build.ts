@@ -10,10 +10,10 @@ export async function build(root: string): Promise<void> {
         "root=.",
 
         "--env",
-        "config=./skeleton-config.json",
+        "config=../skeleton-config.json",
 
         "--env",
-        "servers=../../skeleton-servers.json",
+        "servers=../skeleton-servers.json",
 
         "--env",
         "mode=prod",

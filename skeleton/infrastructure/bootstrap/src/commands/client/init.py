@@ -362,6 +362,7 @@ def init(
         target=project_root,
         frontend=layout["frontend"],
         backend=layout["backend"],
+        framework_root=framework_root,
     )
 
     # ---------------------------------------------------------

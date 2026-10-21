@@ -89,6 +89,23 @@ Skeleton also exposes the individual stages when you want to configure the appli
 
 ### 1. Generate configuration
 
+Generate the project configuration files before initialization.
+Skeleton supports React and SolidJS frontend profiles.
+
+Select the desired frontend framework using the `--config` command:
+
+```bash
+skeleton --config react
+```
+
+Or select SolidJS:
+
+```bash
+skeleton --config solid
+```
+
+If no framework is specified, React is selected by default:
+
 ```bash
 skeleton --config
 ```

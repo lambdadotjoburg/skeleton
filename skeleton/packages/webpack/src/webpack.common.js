@@ -38,35 +38,65 @@ export default (config) => (
         },
         module: {
             rules: [
-                {
-                    test: /\.(ts|js)x?$/, // allow .ts & .tsx
-                    use: {
-                        loader: "ts-loader",
-                        options: {
+                // {
+                //     test: /\.(ts|js)x?$/, // allow .ts & .tsx
+                //     use: {
+                //         loader: "ts-loader",
+                //         options: {
                             
-                            // transpileOnly: true, // FALSE!
-                            compilerOptions: {
-                                noEmit: false,
-                            },
+                //             // transpileOnly: true, // FALSE!
+                //             compilerOptions: {
+                //                 noEmit: false,
+                //             },
 
-                            // getCustomTransformers:
-                            // (_program, getProgram) => (
-                            //     {
-                            //         before: [
-                            //             createTransformer(
-                            //                 // program,
-                            //                 getProgram,
-                            //             ),
-                            //         ],
-                            //     }
-                            // )
+                //             // getCustomTransformers:
+                //             // (_program, getProgram) => (
+                //             //     {
+                //             //         before: [
+                //             //             createTransformer(
+                //             //                 // program,
+                //             //                 getProgram,
+                //             //             ),
+                //             //         ],
+                //             //     }
+                //             // )
+                //         },
+                //     },
+                //     exclude: [
+                //         /node_modules/,
+                //         /dist/ // exclude dist folder!
+                //     ],
+                // },
+
+                {
+                    test: /\.(ts|js)x?$/,
+                    use: [
+                        ...(config.framework === "solid"
+                            ? [
+                                {
+                                    loader: "babel-loader",
+                                    options: {
+                                        presets: ["babel-preset-solid"],
+                                    },
+                                },
+                            ]
+                            : []),
+                        {
+                            loader: "ts-loader",
+                            options: {
+                                // transpileOnly: true, // FALSE!
+                                compilerOptions: {
+                                    noEmit: false,
+                                },
+                            },
                         },
-                    },
+                    ],
                     exclude: [
                         /node_modules/,
-                        /dist/ // exclude dist folder!
+                        /dist/,
                     ],
                 },
+
                 {
                     test: /\.module\.css$/,
                     use: [
