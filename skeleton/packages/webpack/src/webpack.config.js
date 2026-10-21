@@ -39,7 +39,7 @@ export default async (env = {}) => {
 
     // compose config data
     const commonModule = await import(`./webpack.common.js`);
-    const commonConfig = commonModule.default(config);
+    const commonConfig = await commonModule.default(config);
     let monoConfig = merge(commonConfig,envConfig);
 
     // activate features, depending on options (proxy)

@@ -104,6 +104,12 @@ Or select SolidJS:
 skeleton --config solid
 ```
 
+Or select VueJS:
+
+```bash
+skeleton --config vue
+```
+
 If no framework is specified, React is selected by default:
 
 ```bash
@@ -399,7 +405,7 @@ source .venv/bin/activate
 From the test project directory:
 
 ```bash
-python -m pip install --force-reinstall ../framework/dist/skeleton_framework-0.1.3-py3-none-any.whl
+python -m pip install --force-reinstall ../framework/dist/skeleton_framework-0.1.4-py3-none-any.whl
 ```
 
 Adjust the relative path, wheel filename & version to match your framework checkout and build output.

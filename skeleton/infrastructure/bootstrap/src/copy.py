@@ -147,6 +147,109 @@ def _copy_profile_entry_point(
         f"INFO: Copied {framework} entry point: {destination}"
     )
 
+def _copy_profile_files(
+    framework_root: Path,
+    project_root: Path,
+    frontend: str,
+    config: dict,
+) -> None:
+    """Copy additional source files required by the selected framework."""
+
+    framework = config.get("framework")
+
+    profile_files = {
+        "react": (),
+        "solid": (),
+        "vue": (
+            "App.vue",
+            "vue.d.ts",
+        ),
+    }
+
+    if framework not in profile_files:
+        raise ValueError(
+            f"Unsupported frontend framework: {framework!r}"
+        )
+
+    if not profile_files[framework]:
+        return
+
+    config_lib = config.get("lib")
+
+    if not isinstance(config_lib, dict):
+        raise ValueError(
+            "skeleton-config.json: 'lib' must be an object."
+        )
+
+    source_directory = config_lib.get("src", "src")
+
+    if (
+        not isinstance(source_directory, str)
+        or not source_directory.strip()
+    ):
+        raise ValueError(
+            "skeleton-config.json: 'lib.src' must be "
+            "a non-empty relative path."
+        )
+
+    source_path = Path(source_directory)
+
+    if source_path.is_absolute() or ".." in source_path.parts:
+        raise ValueError(
+            "skeleton-config.json: 'lib.src' must be a "
+            "relative path within the frontend directory."
+        )
+
+    profile = (
+        framework_root
+        / "skeleton"
+        / "infrastructure"
+        / "bootstrap"
+        / "src"
+        / "templates"
+        / "profiles"
+        / framework
+    )
+
+    destination_directory = (
+        project_root
+        / frontend
+        / source_path
+    )
+
+    destination_directory.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    for filename in profile_files[framework]:
+
+        source = profile / filename
+        destination = destination_directory / filename
+
+        if not source.is_file():
+            raise FileNotFoundError(
+                f"Frontend profile template not found: {source}"
+            )
+
+        # Preserve client files on repeated initialization.
+        if destination.exists():
+            print(
+                f"INFO: Preserving existing frontend file: "
+                f"{destination}"
+            )
+            continue
+
+        shutil.copy2(
+            source,
+            destination,
+        )
+
+        print(
+            f"INFO: Copied {framework} profile file: "
+            f"{destination}"
+        )
+
 def copy_app_template(
     source: Path,
     target: Path,
@@ -272,6 +375,17 @@ def copy_app_template(
     # ---------------------------------------------------------
 
     _copy_profile_entry_point(
+        framework_root=framework_root,
+        project_root=target,
+        frontend=frontend,
+        config=config,
+    )
+
+    # ---------------------------------------------------------
+    # Copy additional framework-specific source files.
+    # ---------------------------------------------------------
+
+    _copy_profile_files(
         framework_root=framework_root,
         project_root=target,
         frontend=frontend,

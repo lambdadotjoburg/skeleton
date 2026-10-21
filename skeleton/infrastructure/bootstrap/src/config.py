@@ -1,7 +1,7 @@
 import json, shutil
 from pathlib import Path
 
-SUPPORTED_FRAMEWORKS = {"react", "solid"} # add vue
+SUPPORTED_FRAMEWORKS = {"react", "solid", "vue"}
 
 def read_json(path: Path) -> dict:
     with path.open("r", encoding="utf-8") as file:
@@ -12,12 +12,10 @@ def read_json(path: Path) -> dict:
 
     return data
 
-
 def write_json(path: Path, data: dict) -> None:
     with path.open("w", encoding="utf-8") as file:
         json.dump(data, file, indent=4)
         file.write("\n")
-
 
 def config(
     framework_root: Path,

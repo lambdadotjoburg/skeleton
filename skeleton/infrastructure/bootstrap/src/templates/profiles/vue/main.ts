@@ -1,3 +1,5 @@
+import { createApp } from "vue";
+
 const body = document.querySelector("body");
 
 if (!body) {
@@ -6,15 +8,10 @@ if (!body) {
 
 const root = document.createElement("div");
 
+root.id = "root";
+
 body.appendChild(root);
 
-const App = {
-    render() {
-        return h(
-            "h1",
-            "Skeleton + FastAPI + Vue + Webpack"
-        );
-    },
-};
+import App from "./App.vue";
 
-createApp(App).mount(root);
+createApp(App).mount("#root");

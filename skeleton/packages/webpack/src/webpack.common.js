@@ -7,8 +7,18 @@ import TsconfigPathsPlugin from "tsconfig-paths-webpack-plugin";
 // import MiniCssExtractPlugin from "mini-css-extract-plugin";
 // import { createTransformer } from "@skeleton/transformer";
 
-export default (config) => (
-    {
+export default async (config) => {
+
+    const vuePlugins = [];
+
+    if (config.framework === "vue") {
+
+        const { VueLoaderPlugin } = await import("vue-loader");
+
+        vuePlugins.push(new VueLoaderPlugin());
+    }
+
+    return {
         context: config.paths.lib.src,
         /**
          * NOTE: LOAD BEFORE DECORATORS!
@@ -38,36 +48,14 @@ export default (config) => (
         },
         module: {
             rules: [
-                // {
-                //     test: /\.(ts|js)x?$/, // allow .ts & .tsx
-                //     use: {
-                //         loader: "ts-loader",
-                //         options: {
-                            
-                //             // transpileOnly: true, // FALSE!
-                //             compilerOptions: {
-                //                 noEmit: false,
-                //             },
-
-                //             // getCustomTransformers:
-                //             // (_program, getProgram) => (
-                //             //     {
-                //             //         before: [
-                //             //             createTransformer(
-                //             //                 // program,
-                //             //                 getProgram,
-                //             //             ),
-                //             //         ],
-                //             //     }
-                //             // )
-                //         },
-                //     },
-                //     exclude: [
-                //         /node_modules/,
-                //         /dist/ // exclude dist folder!
-                //     ],
-                // },
-
+                ...(
+                    config.framework === "vue" ? [
+                        {
+                            test: /\.vue$/,
+                            loader: "vue-loader",
+                        },
+                    ] : []
+                ),
                 {
                     test: /\.(ts|js)x?$/,
                     use: [
@@ -83,11 +71,34 @@ export default (config) => (
                             : []),
                         {
                             loader: "ts-loader",
+
                             options: {
+
                                 // transpileOnly: true, // FALSE!
+
+                                ...(config.framework === "vue" ? {
+                                    
+                                    appendTsSuffixTo: [/\.vue$/],
+                                    transpileOnly: true,
+
+                                } : {}),
+
                                 compilerOptions: {
+                                    
                                     noEmit: false,
                                 },
+
+                                // getCustomTransformers:
+                                // (_program, getProgram) => (
+                                //     {
+                                //         before: [
+                                //             createTransformer(
+                                //                 // program,
+                                //                 getProgram,
+                                //             ),
+                                //         ],
+                                //     }
+                                // )
                             },
                         },
                     ],
@@ -162,7 +173,10 @@ export default (config) => (
             publicPath: "/",
             clean: true,
         },
+
         plugins: [
+
+            ...vuePlugins,
 
             // // to preserve css folder structure
             // new MiniCssExtractPlugin(
@@ -211,4 +225,4 @@ export default (config) => (
             cacheDirectory: config.paths.cache.dir,
         },
     }
-);
+};
