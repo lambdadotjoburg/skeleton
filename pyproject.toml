@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skeleton-framework"
-version = "1.0.0"
+version = "1.0.1"
 description = "A full-stack orchestration framework: Python orchestration + FastAPI + WebPack."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -45,13 +45,11 @@ where = ["."]
 include = ["skeleton*"]
 namespaces = false
 
-[tool.setuptools]
-include-package-data = false
-
 [tool.setuptools.package-data]
 skeleton = [
     "boilerplate/**/*",
     "boilerplate/**/.*",
+    "docs/sections/*/*.md",
 ]
 
 [project.urls]

@@ -13,14 +13,14 @@ class Documentation:
     @property
     def sections(self) -> dict[str, Path]:
 
-        sections = {}
+        sections: dict[str, Path] = {}
 
-        for path in sorted(
-            (
-                self.root
-                / "sections"
-            ).iterdir()
-        ):
+        directory = self.root / "sections"
+
+        if not directory.is_dir():
+            return sections
+
+        for path in sorted(directory.iterdir()):
 
             if not path.is_dir():
                 continue
@@ -61,7 +61,7 @@ class Documentation:
         if section is not None:
             paths = [self.section(section)]
         else:
-            paths = self.sections.values()
+            paths = list(self.sections.values())
 
         content = []
 
@@ -74,5 +74,8 @@ class Documentation:
                     encoding="utf-8"
                 ).strip()
             )
+
+        if not content:
+            return ""
 
         return "\n\n".join(content) + "\n"
