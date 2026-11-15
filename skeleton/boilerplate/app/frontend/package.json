@@ -1,0 +1,39 @@
+{
+    "name": "{{ _normalized_name }}",
+    "version": "{{ version }}",
+    "description": "{{ description }}",
+    "author": "{{ author }}",
+
+    "license": "ISC",
+    "main": "dist/index.js",
+    "type": "module",
+
+    "dependencies": {},
+    
+    "devDependencies": {
+        
+        "typescript": "^6.0.3",
+
+        "ts-loader": "^9.5.7",
+        "css-loader": "^7.1.4",
+        "style-loader": "^4.0.0",
+
+        "webpack": "^5.106.2",
+        "webpack-cli": "^7.0.2",
+        "webpack-dev-server": "^6.1.0",
+        "webpack-merge": "^6.0.1",
+
+        "html-webpack-plugin": "^5.6.7",
+        "mini-css-extract-plugin": "^2.10.2",
+        
+        "copy-webpack-plugin": "^14.0.0",
+        "tsconfig-paths-webpack-plugin": "^4.2.0",
+
+        "serve": "^14.2.7"
+    },
+    "scripts": {
+        "serve": "webpack serve",
+        "build": "webpack",
+        "preview": "serve"
+    }
+}

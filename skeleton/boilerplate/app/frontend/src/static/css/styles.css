@@ -1,0 +1,20 @@
+/*%*%*%*%*%*%*%*%*%*%*%*%*%*%*%*%*%*%*/
+
+/*
+    disregard ANY/ALL padding, margin
+    & border when computing width/height
+*/
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100vh;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+/*%*%*%*%*%*%*%*%*%*%*%*%*%*%*%*%*%*%*/

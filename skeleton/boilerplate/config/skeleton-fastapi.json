@@ -1,0 +1,12 @@
+{
+    "reload": {
+        "enabled": true,
+        "directories": [
+            "src"
+        ],
+        "extensions": [
+            ".py",
+            ".json"
+        ]
+    }
+}

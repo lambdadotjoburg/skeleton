@@ -1,0 +1,11 @@
+{
+    "mode": "development",
+
+    "webpack": {
+
+        "env": {
+
+            "custom-client-env-var": "custom-client-val-not-safe!"
+        }
+    }
+}

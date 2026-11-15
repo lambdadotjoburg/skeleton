@@ -1,0 +1,70 @@
+{
+    "frontend": {
+
+        "dir": "frontend",
+
+        "webpack": "webpack.config.js",
+
+        "lib": {
+
+            "src": "src",
+            
+            "main": "main",
+            "index": "index",
+
+            "static": "static"
+        },
+
+        "build": {
+            
+            "outdir": "dist",
+            
+            "artifacts": [
+                "dist",
+                "build",
+                "node_modules",
+                "package-lock.json",
+                "*.tsbuildinfo"
+            ]
+        },
+
+        "config": {
+
+            "package": "package.json",
+            "tsconfig": "tsconfig.json"
+        }
+    },
+
+    "backend": {
+
+        "dir": "backend",
+
+        "venv": ".venv",
+
+        "lib": {
+
+            "src": "src",
+
+            "main": "main",
+            "app": "app"
+        },
+
+        "build": {
+
+            "outdir": "dist",
+
+            "artifacts": [
+                "build",
+                "dist",
+                "*.egg-info"
+            ]
+        },
+        
+        "config": {
+
+            "mypy": ".mypy_cache",
+            
+            "pyproject": "pyproject.toml"
+        }
+    }
+}

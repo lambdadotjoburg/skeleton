@@ -1,0 +1,33 @@
+{
+    "settings": {
+        "defaultTimeout": 15.0,
+        "followRedirects": false
+    },
+    
+    "cors": {
+        "allowOrigins": [
+            "http://localhost:8000",
+            "http://127.0.0.1:8000",
+            "http://localhost:3000",
+            "http://127.0.0.1:3000"
+        ],
+        
+        "allowCredentials": true,
+
+        "allowMethods": ["*"],
+        "allowHeaders": ["*"],
+
+        "exposeHeaders": [],
+
+        "allowOriginRegex": null,
+        "allowPrivateNetwork": false,
+        
+        "maxAge": 600
+    },
+    
+    "methods": [
+        "GET", "POST", "PUT",
+        "PATCH", "DELETE", "HEAD",
+        "OPTIONS"
+    ]
+}

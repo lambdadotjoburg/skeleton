@@ -1,0 +1,10 @@
+{
+    "profile": "{{ profile }}",
+    "date": "{{ date }}",
+    "title": "{{ title }}",
+    "name": "{{ name }}",
+    "version": "{{ version }}",
+    "author": "{{ author }}",
+    "license": "{{ license }}",
+    "description": "{{ description }}"
+}

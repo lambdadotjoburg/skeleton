@@ -1,0 +1,12 @@
+{
+    "build": {
+        
+        "outdir": "dist",
+
+        "artifacts": [
+            "demo",
+            "dist",
+            "*.egg-info"
+        ]
+    }
+}

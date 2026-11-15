@@ -1,1 +1,0 @@
-from skeleton.infrastructure.runners.src import main

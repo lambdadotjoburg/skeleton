@@ -1,8 +1,0 @@
-{
-    "config": {
-        "servers": "skeleton-servers.json",
-        "schemas": "skeleton-schemas.json",
-        "proxy": "skeleton/infrastructure/gateway/settings/proxy.json",
-        "services": "skeleton/infrastructure/gateway/settings/services.json"
-    }
-}

@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=77.0.3", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "{{ _normalized_name }}"
+version = "{{ version }}"
+description = "{{ description }}"
+requires-python = ">=3.11"
+
+authors = [
+    { name = "{{ author }}" }
+]
+
+dependencies = [
+    "fastapi>=0.145,<0.146",
+]
+
+[project.optional-dependencies]
+dev = []
+
+[tool.distutils.egg_info]
+egg_base = "."
+
+[tool.mypy]
+python_executable = "{{ venv_python }}"
+cache_dir = ".mypy_cache"

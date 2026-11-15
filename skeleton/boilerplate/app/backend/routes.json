@@ -1,0 +1,22 @@
+{
+    "routes": {
+        "index": {
+            "methods": ["GET"],
+            "route": "/",
+            "summary": "Demo Index",
+            "tags": ["index"]
+        },
+        "status": {
+            "methods": ["GET"],
+            "route": "/status",
+            "summary": "Demo Status",
+            "tags": ["status"]
+        },
+        "html": {
+            "methods": ["GET"],
+            "route": "/html",
+            "summary": "Demo HTML",
+            "tags": ["HTML"]
+        }
+    }
+}

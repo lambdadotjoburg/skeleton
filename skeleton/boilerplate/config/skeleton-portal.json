@@ -1,0 +1,28 @@
+{
+    "browser": "default",
+
+    "services": {
+        "frontend": {
+            "open": false
+        },
+        "gateway": {
+            "open": true
+        },
+        "backend": {
+            "open": false
+        }
+    },
+
+    "docs": {
+        "gateway": {
+            "enabled": false,
+            "open": false,
+            "interface": "docs",
+            "url": "docs"
+        },
+        "backend": {
+            "open": true,
+            "url": "docs"
+        }
+    }
+}

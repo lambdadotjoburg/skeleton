@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skeleton-framework"
-version = "0.1.4"
-description = "A full-stack app framework: Python orchestration + FastAPI + WebPack frontend."
+version = "1.0.0"
+description = "A full-stack orchestration framework: Python orchestration + FastAPI + WebPack."
 readme = "README.md"
 requires-python = ">=3.11"
 license = "LicenseRef-Proprietary"
@@ -16,26 +16,42 @@ authors = [
 ]
 
 dependencies = [
-    "uvicorn",
-    "fastapi",
-    "httpx",
-    "watchfiles",
+
+    "twine>=7.0.0",
+    "build>=1.6.1",
+
+    "packaging>=24,<27",
+    "anyver>=1.2,<2.0",
+    
+    "tomlkit>=0.15.2",
+    "pathspec>=0.12,<2.0",
+
+    "psutil>=6.0,<8.0",
+    
+    "uvicorn>=0.34,<1.0",
+    "fastapi>=0.115,<1.0",
+    "httpx>=0.28,<1.0",
+    "watchfiles>=1.0,<2.0",
 ]
 
+[project.optional-dependencies]
+dev = []
+
 [project.scripts]
-skeleton = "skeleton.cli:main"
+skeleton = "skeleton.main:cli"
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["skeleton*"]
 namespaces = false
 
+[tool.setuptools]
+include-package-data = false
+
 [tool.setuptools.package-data]
 skeleton = [
-    "infrastructure/**/*.json",
-    "infrastructure/bootstrap/src/templates/**/*",
-    "infrastructure/bootstrap/src/templates/config/.gitignore",
-    "packages/.skeleton/*.tgz",
+    "boilerplate/**/*",
+    "boilerplate/**/.*",
 ]
 
 [project.urls]
