@@ -2,64 +2,93 @@ import sys
 
 from pathlib import Path
 
-from .environment.dependencies import dependencies
-from .environment.resolver import in_virtual_environment
+from .constants.command import COMMAND_ATTRIBUTE
 
 def cli(root: Path | None = None) -> int:
 
-    framework_dev = root is not None
-
-    from .context.mode import Mode
-    from .context.predicates import predicates
-
-    from .context.context import CLIContext
-    from .context.auth import Authorization
-
+    from .layout.client import ClientLayout
     from .layout.framework import FrameworkLayout
-    from .register import create_registry
 
     if root is None:
-        root = Path(__file__).resolve().parents[1]
+        root = Path(
+            __file__
+        ).resolve().parents[1]
 
     cwd = Path.cwd().resolve()
     root = root.resolve()
 
-    # cwd = Path.cwd().resolve()
-    # root = root.resolve()
+    # Determine whether executing from framework root.
+    framework_dev = cwd == root
 
+    client = None
     framework = FrameworkLayout(root=root)
 
-    registry = create_registry(framework)
+    if not framework_dev:
+        client = ClientLayout(root=cwd)
 
-    context = CLIContext(
-        cwd=cwd,
-        root=cwd,
-        REGISTRY=registry,
-        FRAMEWORK=framework,
-    )
-
+    from .bootstrap.venv import in_virtual_environment
+    
     if not in_virtual_environment():
 
-        from .environment.notice import advisory
-        from .environment.notice import activation
+        from .bootstrap.notice import advisory
+        from .bootstrap.notice import activation
 
         print(advisory())
         print(activation())
 
+        return 1
+
     if framework_dev:
+
+        from .bootstrap.dependencies import dependencies
 
         missing = dependencies(root, dev=True)
 
         if missing:
-            from .environment.notice import feedback
+            from .bootstrap.notice import feedback
 
             print(feedback(missing))
             return 1
 
-    registry.authorizer = Authorization(
-        context=context,
-        predicates=predicates,
+    from .plugins.loader import loader
+    from .plugins.filter import decorated
+    from .context.context import CLIContext
+
+    context = CLIContext(
+        cwd=cwd,
+        root=cwd,
+        CLIENT=client,
+        FRAMEWORK=framework,
     )
+
+    registry = context.REGISTRY
+
+    # Discover framework commands.
+    for module in loader(
+        directory=framework.CLI,
+        root=framework.root,
+        filter=decorated("command"),
+    ):
+        registry.discover(
+            module,
+            attribute=COMMAND_ATTRIBUTE
+        )
+
+    # when operating as client!
+    if client and client.config.exists("skeleton-project.json"):
+
+        if client.plugins.is_dir():
+
+            # Discover client plugins,
+            for module in loader(
+                directory=client.plugins,
+                root=client.root,
+                filter=decorated("command"),
+            ):
+                registry.discover(
+                    module,
+                    attribute=COMMAND_ATTRIBUTE
+                )
 
     return registry.invoke(
         args=sys.argv[1:],

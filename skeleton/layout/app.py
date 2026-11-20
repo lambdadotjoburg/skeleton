@@ -2,6 +2,13 @@ import dataclasses
 
 from pathlib import Path
 
+from typing import Literal
+
+from ..repository.manifest import (
+    PackageManifest,
+    PyProjectManifest,
+)
+
 @dataclasses.dataclass(
     frozen=True,
     kw_only=True,
@@ -44,5 +51,19 @@ class AppLayout:
 
     @property
     def pyproject(self) -> Path:
-        return self.backend / "pyproject.toml"    
-    
+        return self.backend / "pyproject.toml"
+
+    def manifest(
+        self,
+        resource: Literal["frontend", "backend"],
+    ) -> PackageManifest | PyProjectManifest:
+
+        if resource == "frontend":
+
+            return PackageManifest(path=self.package)
+
+        if resource == "backend":
+
+            return PyProjectManifest(path=self.pyproject)
+
+        raise ValueError("Unsupported manifest resouce type!")

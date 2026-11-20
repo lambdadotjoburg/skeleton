@@ -29,22 +29,12 @@ async def start_gateway(
 
 # "serve": "webpack serve --config webpack.config.js"
 async def start_frontend(
-    engine: EngineLayout
+    engine: EngineLayout,
 ) -> asyncio.subprocess.Process:
 
     from ..runtime.mode import RuntimeMode
 
     mode = engine.client.mode
-
-    if mode == RuntimeMode.DEV:
-        script = "serve"
-    elif mode == RuntimeMode.PREVIEW:
-        script = "preview"
-    else:
-        raise ValueError(
-            f"Unsupported frontend runtime mode: {mode}"
-        )
-
     server = engine.server.server(ServerName.FRONTEND)
 
     if not engine.webpack.is_file():
@@ -57,38 +47,41 @@ async def start_frontend(
 
     npm = engine.client.frontend.npm
 
-    command = [
-        npm,
-        "run",
-        script,
-        "--",
-    ]
+    if mode == RuntimeMode.DEV:
 
-    if engine.client.mode == RuntimeMode.DEV:
-
-        command.extend(
-            [
-                "--config", str(engine.webpack),
-                "--env", f"root={engine.client.root}",
-                "--env", f"mode={engine.client.mode.value}",
-                "--env", f"host={server.host}",
-                "--env", f"port={server.port}",
-                "--host", server.host,
-                "--port", str(server.port),
-            ]
-        )
+        command = [
+            npm,
+            "exec",
+            "--",
+            "webpack",
+            "serve",
+            "--config", str(engine.webpack),
+            "--env", f"root={engine.client.root}",
+            "--env", f"mode={mode.value}",
+            "--env", f"host={server.host}",
+            "--env", f"port={server.port}",
+            "--host", server.host,
+            "--port", str(server.port),
+        ]
 
         for key, value in engine.client.runtime.webpack.items():
             command.extend(["--env", f"{key}={value}"])
 
-    elif engine.client.mode == RuntimeMode.PREVIEW:
+    elif mode == RuntimeMode.PREVIEW:
 
-        command.extend(
-            [
-                "-s",
-                str(engine.client.frontend.outdir),
-                "-l", f"tcp://{server.host}:{server.port}",
-            ]
+        command = [
+            npm,
+            "exec",
+            "--",
+            "serve",
+            "-s",
+            str(engine.client.frontend.outdir),
+            "-l", f"tcp://{server.host}:{server.port}",
+        ]
+
+    else:
+        raise ValueError(
+            f"Unsupported frontend runtime mode: {mode}"
         )
 
     return await asyncio.create_subprocess_exec(

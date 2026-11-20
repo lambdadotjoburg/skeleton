@@ -1,7 +1,10 @@
 from pathlib import Path
 
-from ..environment.resolver import Resolver
+from ..repository.manifest import PyProjectManifest
+
 from ..environment.resolver import resolve_interpreter
+
+from ..environment.resolver import Resolver
 
 class PythonLayout:
 
@@ -29,6 +32,10 @@ class PythonLayout:
     def pyproject(self) -> Path:
         return self.root / "pyproject.toml"
 
+    @property
+    def manifest(self) -> PyProjectManifest:
+        return PyProjectManifest(path=self.pyproject)
+    
     # @property
     # def mypy_cache(self) -> list[Path]:
     #     return list(self.root.rglob(".mypy_cache"))

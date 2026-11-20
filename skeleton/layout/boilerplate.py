@@ -20,6 +20,11 @@ class BoilerplateLayout(ConfigLayout):
         repr=False,
     )
 
+    PLUGINS: Path = dataclasses.field(
+        init=False,
+        repr=False,
+    )
+
     APP: AppLayout = dataclasses.field(
         init=False,
         repr=False,
@@ -37,6 +42,11 @@ class BoilerplateLayout(ConfigLayout):
         object.__setattr__(
             self, "PROFILES",
             self.root / "profiles",
+        )
+
+        object.__setattr__(
+            self, "PLUGINS",
+            self.root / "plugins",
         )
 
         object.__setattr__(

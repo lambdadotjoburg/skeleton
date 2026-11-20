@@ -26,6 +26,8 @@ class FrameworkLayout(PythonLayout, ConfigLayout):
 
     root: Path
 
+    CLI: Path = dataclasses.field(init=False)
+
     DOCUMENTATION: Documentation = dataclasses.field(init=False)
 
     BOILERPLATE: BoilerplateLayout = dataclasses.field(init=False)
@@ -73,11 +75,10 @@ class FrameworkLayout(PythonLayout, ConfigLayout):
 
         object.__setattr__(
             self, "CLI",
-            Path(
-                self.root
-                / "skeleton"
-                / "cli",
-            ),
+            self.root
+            / "skeleton"
+            / "cli"
+            / "definitions"
         )
 
         object.__setattr__(

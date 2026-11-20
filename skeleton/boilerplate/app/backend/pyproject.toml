@@ -12,9 +12,7 @@ authors = [
     { name = "{{ author }}" }
 ]
 
-dependencies = [
-    "fastapi>=0.145,<0.146",
-]
+dependencies = []
 
 [project.optional-dependencies]
 dev = []

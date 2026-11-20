@@ -2,6 +2,8 @@
 
 ![Skeleton Logo](https://raw.githubusercontent.com/lambdadotjoburg/skeleton/main/skeleton.png)
 
+## Overview
+
 Skeleton is a full-stack application orchestration framework
 that combines Python orchestration, a FastAPI reverse-proxy gateway,
 a Python backend, and a TypeScript frontend.
@@ -21,8 +23,15 @@ environments and tooling required by each application component.
 - **Webpack tooling** for frontend development and production builds.
 - **JSON-based configuration** for project metadata, structure, dependencies, schemas, servers, etc.
 - **Command-line interface** for project management, development, versioning, distribution, and cleanup.
+- **Plugins & Extension Points** for extending skeleton framework internals like custom commands and scripts.
 
-## Architecture
+# Architecture
+
+Skeleton employs a modular, layered architecture
+to separate project orchestration, gateway services,
+backend APIs, and frontend tooling.
+
+## Layers
 
 Skeleton separates the application into cooperating layers:
 
@@ -41,7 +50,7 @@ Skeleton separates the application into cooperating layers:
 The gateway provides a central entry point for browser requests
 and coordinates communication between the frontend and backend.
 
-## Default Development Ports
+## Default Ports
 
 The default development configuration uses the following ports:
 
@@ -66,6 +75,41 @@ http://127.0.0.1:8080/
 ```
 
 Actual routes depend on the application's server and gateway configuration.
+
+## Client Project Structure
+
+A client project consists of three main directories:
+
+- `config/` - project and service configuration files.
+- `backend/` - Python application and API.
+- `frontend/` - TypeScript application and static assets.
+
+The project root also contains its `README.md` and `.gitignore` files.
+
+Dependency installation creates a backend `.venv/` and frontend `node_modules/` directory.
+
+The exact structure depends on the selected frontend profile and project configuration.
+
+Optional VS Code settings are generated in `.vscode/`.
+
+To generate the optional `.vscode` settings for mypy support, run:
+
+```bash
+skeleton --vscode --feature mypy
+```
+
+To generate the optional `.vscode` settings for markdown support, run:
+
+```bash
+skeleton --vscode --feature markdown
+```
+
+# Project Setup
+
+Skeleton Framework is distributed through [PyPI](https://pypi.org/project/skeleton-framework/)
+and its source code is hosted on [GitHub](https://github.com/lambdadotjoburg/skeleton).
+
+This section covers installing Skeleton, creating a project, and configuring its environment.
 
 ## Installation
 
@@ -157,47 +201,83 @@ and open the application at the configured local address.
 
 ## Workflow
 
-The [`--quickstart`](#quickstart) command combines `--config`, `--init` & `--install`.
+Skeleton provides individual commands for managing the application lifecycle.
 
-For more control, skeleton exposes each command separately for better workflow.
-
-### 1. Configure
+### Configure
 
 ```bash
 skeleton --config --profile <profile>
 ```
 
-Generates the project configuration files using the selected frontend profile.
+Generates project configuration files for the selected frontend profile.
 
-Review and customize the configuration before continuing, if necessary.
-
-### 2. Initialize
+### Initialize
 
 ```bash
 skeleton --init
 ```
 
-Creates the application structure
-from the framework's boilerplate
-& prepares the frontend & backend components.
+Creates the application structure from the framework's boilerplate.
 
-### 3. Install
+### Install
 
 ```bash
 skeleton --install
 ```
 
-Installs frontend dependencies using npm
-& backend Python dependencies into
-the backend virtual environment.
+Installs frontend and backend dependencies.
 
-### 4. Start
+### Start
 
 ```bash
 skeleton --start
 ```
 
 Starts the configured application services.
+
+### Common Flags
+
+Most commands support additional execution flags:
+
+| Flag        | Purpose                                         |
+|-------------|-------------------------------------------------|
+| `--dry`     | Previews an operation without applying changes. |
+| `--verbose` | Displays additional execution information.      |
+
+Flags are command-specific. Use `--help` to inspect their availability.
+
+## Configuration
+
+Skeleton stores project configuration in the `config/` directory.
+Configuration files use the `skeleton-*.json` naming convention.
+
+| File                         | Purpose                                                |
+|------------------------------|--------------------------------------------------------|
+| `skeleton-metadata.json`     | Project metadata and frontend profile.                 |
+| `skeleton-project.json`      | Project directories, paths, and build settings.        |
+| `skeleton-dependencies.json` | Authoritative frontend and backend dependencies.       |
+| `skeleton-servers.json`      | Gateway, frontend, and backend host and port settings. |
+| `skeleton-schemas.json`      | HTTP and WebSocket gateway routing rules.              |
+| `skeleton-fastapi.json`      | Backend reload settings.                               |
+| `skeleton-portal.json`       | Browser launch and API documentation settings.         |
+| `skeleton-webpack.json`      | Frontend Webpack configuration.                        |
+
+## Dependencies
+
+The `skeleton-dependencies.json` file is the authoritative source for project dependencies.
+
+Skeleton reconciles dependencies with frontend `package.json` and backend `pyproject.toml` manifests.
+
+Changes made directly to those manifests may be overwritten during reconciliation if not reflected in the configuration file.
+
+Review this file before changing project dependencies.
+
+# Command Line Interface
+
+Skeleton provides commands for managing the client project lifecycle,
+from initial configuration and dependency installation to running and building the application.
+
+This section covers the available CLI commands, plugins, and client-defined scripts.
 
 ## Command-Line Interface
 
@@ -252,100 +332,113 @@ Or write a documentation section to a file/output:
 skeleton --readme --section architecture --write ARCHITECTURE.md
 ```
 
-### Common Flags
+## Client-defined scripts
 
-Most commands support additional execution flags:
+Skeleton allows client projects to expose
+their own custom npm scripts through the
+command-line interface at the project root.
 
-| Flag        | Purpose                                         |
-|-------------|-------------------------------------------------|
-| `--dry`     | Previews an operation without applying changes. |
-| `--verbose` | Displays additional execution information.      |
+Define scripts in the client's `package.json`:
 
-Flags are command-specific. Use `--help` to inspect their availability.
+```json
+{
+    "scripts": {
+        "build:packages": "tsc --build",
+        "watch:packages": "tsc --build --watch",
+        "clean:packages": "tsc --build --clean"
+    }
+}
+```
 
-### Lifecycle Commands
+Run a script through Skeleton using `--script`:
 
-Manage generated project distributions and build artifacts:
+```bash
+skeleton --script build:packages
+skeleton --script watch:packages
+skeleton --script clean:packages
+```
+
+Skeleton delegates execution to npm, invoking
+the requested script from the client's project context.
+
+This allows clients to extend Skeleton's command-line
+without requiring changes to the framework's internals.
+
+**Built-in operations remain independent.**
+
+Commands such as `--start`, `--dist`, and `--preview`
+are managed by Skeleton and do not depend on npm script.
+
+Client projects can therefore customize `package.json` scripts
+without changing the behaviour of Skeleton's built-in commands.
+
+## Plugins
+
+Skeleton supports client-defined CLI commands via plugins.
+
+Plugins are Python modules placed inside
+the client's configured plugin directory.
+
+The default directory is `plugins/`, as specified by
+the `plugins` entry in `config/skeleton-project.json`.
+
+### Creating a command
+
+Use the `@command` decorator to register a custom command.
+
+```python
+from skeleton.cmd.types import Values
+from skeleton.cmd.command import Command
+from skeleton.context.context import CLIContext
+from skeleton.decorators.command import command
+
+@command(
+    name="custom-client-command",
+    factory=lambda context: Command.Definition(
+        name="custom-client-command",
+        description="Custom command using client context!",
+        arguments={"arg": "*"},
+    ),
+)
+def custom_client_command(
+    *,
+    values: Values,
+    context: CLIContext,
+) -> int:
+    print(context.root)
+    print(values["arg"])
+    return 0
+```
+
+## Discovery
+
+Skeleton recursively discovers Python modules
+inside the configured plugin directory.
+
+Modules containing a `@command` declaration are imported
+and their commands are registered with the CLI.
+
+This allows client projects to add custom commands
+without modifying the framework itself.
+
+# Lifecycle
+
+Skeleton provides commands for maintaining client projects
+and managing their versions throughout the application lifecycle.
+
+## Maintenance
+
+To manage generated project dist, build artifact and outputs, skeleton provides lifecycle commands:
 
 | Command            | Purpose                                     |
 |--------------------|---------------------------------------------|
 | `skeleton --dist`  | Builds the client distribution.             |
 | `skeleton --purge` | Removes generated build artifacts.          |
 
+**CAUTION**
+
 `--purge` is destructive & will remove all build artifacts
 as listed in `config/skeleton-project.json`, including `node_modules`.
-
-## Project Structure
-
-A client project consists of three main directories:
-
-- `config/` - project and service configuration files.
-- `backend/` - Python application and API.
-- `frontend/` - TypeScript application and static assets.
-
-The project root also contains its `README.md` and `.gitignore` files.
-
-Dependency installation creates a backend `.venv/` and frontend `node_modules/` directory.
-
-The exact structure depends on the selected frontend profile and project configuration.
-
-Optional VS Code settings are generated in `.vscode/`.
-
-To generate the optional `.vscode` settings for mypy support, run:
-
-```bash
-skeleton --vscode --feature mypy
-```
-
-To generate the optional `.vscode` settings for markdown support, run:
-
-```bash
-skeleton --vscode --feature markdown
-```
-
-## Framework Development
-
-### Installation & Setup
-
-Clone the repository and enter its directory:
-
-```bash
-git clone https://github.com/lambdadotjoburg/skeleton.git
-cd skeleton
-```
-
-Follow the [Installation](#installation) instructions
-to create and activate a virtual environment.
-
-Install the framework in editable mode with development dependencies:
-
-```bash
-python -m pip install --upgrade pip
-python -m pip install -e ".[dev]"
-```
-
-Editable installation allows framework source
-changes to take effect without reinstalling the package.
-
-### Development Commands
-
-Framework development commands are run from the repository root using `python run.py`.
-
-| Command                 | Purpose                                 |
-|-------------------------|-----------------------------------------|
-| `python run.py --dist`  | Builds the framework distribution.      |
-| `python run.py --demo`  | Creates a demo project & installs dist. |
-| `python run.py --purge` | Removes framework build artifacts.      |
-
-To specify a demo project location:
-
-```bash
-python run.py --demo --target path/to/demo/project
-```
-
-The demo operation creates the project directory,
-including its `.venv` environment, and installs
-the framework dist into that environment.
 
 ## Versioning
 
@@ -398,6 +491,54 @@ The operation updates the relevant files:
 - the framework's `pyproject.toml` in framework development mode
 - the backend's `pyproject.toml` + `package.json` in a client project.
 
+# Development
+
+This section covers working on the Skeleton Framework itself,
+including repository setup, development operations,
+and publishing framework distributions.
+
+## Repository Setup
+
+Clone the repository and enter its directory:
+
+```bash
+git clone https://github.com/lambdadotjoburg/skeleton.git
+cd skeleton
+```
+
+Follow the [Installation](#installation) instructions
+to create and activate a virtual environment.
+
+Install the framework in editable mode with development dependencies:
+
+```bash
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev]"
+```
+
+Editable installation allows framework source
+changes to take effect without reinstalling the package.
+
+## Development Commands
+
+Framework development commands are run from the repository root using `python run.py`.
+
+| Command                 | Purpose                                 |
+|-------------------------|-----------------------------------------|
+| `python run.py --dist`  | Builds the framework distribution.      |
+| `python run.py --demo`  | Creates a demo project & installs dist. |
+| `python run.py --purge` | Removes framework build artifacts.      |
+
+To specify a demo project location:
+
+```bash
+python run.py --demo --target path/to/demo/project
+```
+
+The demo operation creates the project directory,
+including its `.venv` environment, and installs
+the framework dist into that environment.
+
 ## Publish
 
 Install or update Twine & validate the generated artifacts:
@@ -437,6 +578,8 @@ frontend tooling, and backend services independently manageable.
 
 ### 1. Operational Improvements
 
+- [ ] Make skeleton tolerant of absent backend and/or frontend configuration.
+- [ ] Introduce cli syntax `--stack react+node` so client can choose a combo.
 - [ ] Explore combining `--dist` and `--preview` into a single operation.
 
 ### 2. Gateway Server updates

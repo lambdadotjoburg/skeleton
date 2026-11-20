@@ -1,0 +1,1 @@
+COMMAND_ATTRIBUTE = "__skeleton_command__"

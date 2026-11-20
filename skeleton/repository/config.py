@@ -82,6 +82,9 @@ class Config:
 
         return self._cache[path]
 
+    def exists(self, name: str) -> bool:
+        return (self.root / name).is_file()
+
     def require(
         self,
         names: str | Path | Iterable[str | Path],

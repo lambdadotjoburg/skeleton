@@ -8,6 +8,8 @@ from ..runtime.server import ServerName
 
 CMD_DEF_SERVER = Command.Definition(
 
+    name="server",
+
     description="start skeleton reverse proxy gateway",
 
     arguments={

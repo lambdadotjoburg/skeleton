@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "skeleton-framework"
-version = "1.0.1"
+version = "2.0.0"
 description = "A full-stack orchestration framework: Python orchestration + FastAPI + WebPack."
 readme = "README.md"
 requires-python = ">=3.11"

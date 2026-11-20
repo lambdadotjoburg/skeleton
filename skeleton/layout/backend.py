@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Any, override
 from typing import TYPE_CHECKING
 
-from skeleton.layout.python import PythonLayout
+from .python import PythonLayout
 
 if TYPE_CHECKING:
     from .client import ClientLayout

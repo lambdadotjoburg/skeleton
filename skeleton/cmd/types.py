@@ -1,7 +1,15 @@
 from __future__ import annotations
 
-from typing import Literal, TypeAlias
-from typing import Protocol, TYPE_CHECKING
+from collections.abc import Callable
+
+from typing import (
+    Literal,
+    TypeVar,
+    TypeAlias,
+    Protocol,
+)
+
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from .command import Command
@@ -25,3 +33,10 @@ class AuthProtocol(Protocol):
     def authorize(self, command: Command) -> None: ...
 
     def permits(self, command: Command) -> bool: ...
+
+ContextT = TypeVar("ContextT")
+
+DefinitionFactory: TypeAlias = Callable[
+    [ContextT],
+    "Command.Definition"
+]

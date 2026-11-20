@@ -13,7 +13,7 @@ class Runner(Protocol):
         cwd: Path,
         verbose: bool = False,
         check: bool = False,
-        description: str,
+        description: str | None = None,
     ) -> int: ...
 
 def run(
@@ -22,10 +22,10 @@ def run(
     cwd: Path,
     verbose: bool = False,
     check: bool = False,
-    description: str,
+    description: str | None = None,
 ) -> int:
 
-    if verbose:
+    if verbose and description:
         print(f"\n{description}")
 
     try:

@@ -1,5 +1,3 @@
-import sys
-
 from pathlib import Path
 
 from typing import Protocol
@@ -28,8 +26,3 @@ def resolve_module(root: Path, path: Path) -> str:
         .relative_to(root)
         .with_suffix("").parts
     )
-
-# .venv detection heuristic!
-def in_virtual_environment() -> bool:
-
-    return sys.prefix != sys.base_prefix

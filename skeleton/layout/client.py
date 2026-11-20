@@ -2,7 +2,7 @@ import dataclasses
 
 from pathlib import Path
 
-from typing import Any, Literal, TypeAlias
+from typing import Any, Literal
 
 from .config import ConfigLayout
 from .backend import BackendLayout
@@ -10,8 +10,6 @@ from .frontend import FrontendLayout
 
 from ..runtime.mode import RuntimeMode
 from ..runtime.config import RuntimeConfig
-
-Resource: TypeAlias = Literal["frontend", "backend"]
 
 @dataclasses.dataclass(
     frozen=True,
@@ -73,6 +71,10 @@ class ClientLayout(ConfigLayout):
     @property
     def dependencies(self) -> dict[str, Any]:
         return self.config.load("skeleton-dependencies.json")
+
+    @property
+    def plugins(self) -> Path:
+        return self.root / self.project.get("plugins", "plugins")
 
     @property
     def runtime(self) -> RuntimeConfig:
@@ -137,7 +139,7 @@ class ClientLayout(ConfigLayout):
 
     def artifacts(
         self,
-        resource: Resource | None = None
+        resource: Literal["frontend", "backend"] | None = None
     ) -> list[Path]:
 
         if resource == "frontend":

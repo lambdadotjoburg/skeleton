@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-import shutil
-
 import dataclasses
 
 from pathlib import Path
 
-from typing import TYPE_CHECKING, Any
+from typing import Any, override
+from typing import TYPE_CHECKING
+
+from .node import NodeLayout
 
 if TYPE_CHECKING:
     from .client import ClientLayout
@@ -15,9 +16,19 @@ if TYPE_CHECKING:
     frozen=True,
     kw_only=True,
 )
-class FrontendLayout:
+class FrontendLayout(NodeLayout):
 
     client: ClientLayout
+
+    @property
+    @override
+    def root(self) -> Path:
+        return self.client.root / self.dir
+
+    # type trick!
+    @root.setter
+    def root(self, _: Path) -> None:
+        pass
 
     @property
     def project(self) -> dict[str, Any]:
@@ -26,10 +37,6 @@ class FrontendLayout:
     @property
     def dir(self) -> str:
         return self.project["dir"]
-
-    @property
-    def root(self) -> Path:
-        return self.client.root / self.dir
 
     @property
     def webpack(self) -> Path:
@@ -85,21 +92,6 @@ class FrontendLayout:
         return self.root / self.config["tsconfig"]
 
     @property
+    @override
     def package(self) -> Path:
         return self.root / self.config["package"]
-
-    @property
-    def npm(self) -> str:
-        
-        # npm = "npm.cmd" if os.name == "nt" else "npm"
-
-        # gets npm from ENV vars!
-        npm = shutil.which("npm")
-
-        if npm is None:
-            raise FileNotFoundError(
-                "npm was not found:\n"
-                "Install Node.js & npm first!"
-            )
-
-        return npm
